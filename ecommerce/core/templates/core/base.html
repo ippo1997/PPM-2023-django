@@ -14,7 +14,7 @@
             <a href="#" class="text-gray-600 hover:text-gray-800">New item</a>
             <a href="#" class="text-gray-600 hover:text-gray-800">Browse</a>
             <a href="#" class="px-6 py-3 text-lg text-white bg-teal-600 hover:bg-blue-700 rounded-lg">Login</a>
-            <a href="#" class="px-6 py-3 text-lg text-white bg-blue-600 hover:bg-blue-700 rounded-lg">Sign up</a>
+            <a href="{% url 'core:signup' %}" class="px-6 py-3 text-lg text-white bg-blue-600 hover:bg-blue-700 rounded-lg">Sign up</a>
         </div>
     </nav>
     <div class="px-6 py-6">
@@ -31,7 +31,7 @@
             <h3 class="mb-5 font-semibold text-gray-400">Footer menu</h3>
             <ul class="space-y-2">
                 <li><a href="#" class="text-gray-300 hover:text-gray-100">About</a></li>
-                <li><a href="{% url 'contact' %}" class="text-gray-300 hover:text-gray-100">Contact</a></li>
+                <li><a href="{% url 'core:contact' %}" class="text-gray-300 hover:text-gray-100">Contact</a></li>
                 <li><a href="#" class="text-gray-300 hover:text-gray-100">Privacy</a></li>
                 <li><a href="#" class="text-gray-300 hover:text-gray-100">Terms</a></li>
             </ul>
