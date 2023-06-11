@@ -20,4 +20,5 @@ urlpatterns = [
     path('order-summary/', views.order_summary, name='order_summary'),
     path('delete-order/<int:pk>/', views.delete_order, name='delete_order'),
     path('place-order/', views.place_order, name='place_order'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='core:index'), name='logout'),
 ]
