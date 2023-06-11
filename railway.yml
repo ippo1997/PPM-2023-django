@@ -1,9 +1,10 @@
-build:
-  - name: Python
-    version: 3.9
-  - name: Pip
-    version: 21.3.1
-  - name: Yarn
-    version: 1.22.17
-
-start: python manage.py runserver 0.0.0.0:$PORT
+version: 2
+frontend:
+  builders:
+    - name: Nixpacks
+      buildCommand: python manage.py collectstatic --noinput
+      watchPatterns:
+        - "ecommerce/**"
+  ports:
+    - 8000
+  startCommand: python manage.py runserver 0.0.0.0:$PORT
