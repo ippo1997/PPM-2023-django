@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 
 from item.models import Category, Item
@@ -79,3 +80,18 @@ def create_order(request):
         return redirect('core:cart')
 
 
+@login_required
+def order_summary(request):
+    allowed_statuses = ['pending_payment', 'processing']
+    orders = Order.objects.filter(user=request.user)
+    return render(request, 'core/order_summary.html', {'orders': orders, 'allowed_statuses': allowed_statuses})
+
+
+@login_required
+def delete_order(request, pk):
+    order = get_object_or_404(Order, pk=pk, user=request.user)
+
+    if request.method == 'POST' and order.status in ['pending_payment', 'processing']:
+        order.delete()
+
+    return redirect('core:order_summary')

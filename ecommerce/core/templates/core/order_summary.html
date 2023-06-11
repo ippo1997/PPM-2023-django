@@ -1,0 +1,28 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+    <h1>Order Summary</h1>
+    <table>
+        <tr>
+            <th>Order ID</th>
+            <th>Status</th>
+            <th>Total Price</th>
+            <th>Action</th>
+        </tr>
+        {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.status }}</td>
+                <td>{{ order.total_price }}</td>
+                <td>
+                    {% if order.status in allowed_statuses %}
+                        <form method="POST" action="{% url 'core:delete_order' order.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
