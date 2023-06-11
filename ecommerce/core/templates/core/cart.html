@@ -21,8 +21,10 @@
             {% endfor %}
         </ul>
         <hr class="m-2">
-        <p><b>Total:</b> {{ total_price }}€</p>
-    {% else %}
-        <p>The cart is empty.</p>
+        <p>Total: {{ total_price }}€</p>
+    <form action="{% url 'core:create_order' %}" method="POST">
+        {% csrf_token %}
+        <button type="submit">Place an order</button>
+    </form>
     {% endif %}
 {% endblock %}

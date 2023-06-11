@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from item.models import Category, Item
 
 from .forms import SignupForm
-# from .models import Item
+from .models import Order
 
 
 def index(request):
@@ -61,3 +61,21 @@ def update_cart_item_quantity(request, item_id):
         cart_items += [item_id] * quantity
         request.session['cart'] = cart_items
     return redirect('core:cart')
+
+
+def order_detail(request, pk):
+    order = get_object_or_404(Order, pk=pk, user=request.user)
+    return render(request, 'core/order_detail.html', {'order': order})
+
+
+def create_order(request):
+    if request.method == 'POST':
+        cart_items = request.session.get('cart', [])
+        order = Order.objects.create(user=request.user, status='pending_payment')
+        order.items.add(*cart_items)
+        del request.session['cart']
+        return redirect('core:order_detail', pk=order.pk)
+    else:
+        return redirect('core:cart')
+
+

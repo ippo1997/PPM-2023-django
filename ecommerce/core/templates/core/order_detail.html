@@ -1,0 +1,16 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Dettaglio ordine{% endblock %}
+
+{% block content %}
+    <h1>Dettaglio ordine</h1>
+    <p>Ordine: {{ order }}</p>
+    <p>Stato: {{ order.status }}</p>
+    <p>Data creazione: {{ order.created_at }}</p>
+    <h2>Prodotti</h2>
+    <ul>
+        {% for item in order.items.all %}
+            <li>{{ item.name }} - Prezzo: {{ item.price }}€</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
