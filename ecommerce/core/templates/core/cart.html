@@ -1,0 +1,28 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Cart{% endblock %}
+
+{% block content %}
+    <h2 class="mb-12 text-2xl text-center">Cart</h2>
+    
+    {% if items %}
+        <ul>
+            {% for item in items %}
+                <li>
+                    <p class="mb-6 text-xl">{{ item.name }}</p>
+                    <p class="text-gray-500">Price: {{ item.price }}€</p>
+                    <form action="{% url 'core:update_cart_item_quantity' item.id %}" method="POST">
+                        {% csrf_token %}
+                        <input type="number" name="quantity" value="1" min="1">
+                        <button type="submit" class="inline-block mt-3 px-3 py-3 bg-gray-800 text-white rounded-xl">Update quantity</button>
+                    </form>
+                    <a href="{% url 'core:remove_from_cart' item.id %}" class="inline-block mt-3 px-3 py-3 bg-red-800 text-white rounded-xl">Remove from cart</a>
+                </li>
+            {% endfor %}
+        </ul>
+        <hr class="m-2">
+        <p><b>Total:</b> {{ total_price }}€</p>
+    {% else %}
+        <p>The cart is empty.</p>
+    {% endif %}
+{% endblock %}
