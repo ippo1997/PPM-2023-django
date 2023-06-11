@@ -75,7 +75,7 @@ def create_order(request):
         order = Order.objects.create(user=request.user, status='pending_payment')
         order.items.add(*cart_items)
         del request.session['cart']
-        return redirect('core:order_detail', pk=order.pk)
+        return redirect('core:place_order')  # Reindirizza alla pagina di pagamento
     else:
         return redirect('core:cart')
 
@@ -95,3 +95,10 @@ def delete_order(request, pk):
         order.delete()
 
     return redirect('core:order_summary')
+
+
+def place_order(request):
+    payment_data = request.POST.get('payment_data', None)
+    if payment_data:
+        return redirect('payment_confirmation')
+    return render(request, 'core/payment_confirmation.html', {'error_message': 'Dati di pagamento non validi'})

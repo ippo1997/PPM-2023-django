@@ -1,0 +1,16 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Payment confirmation{% endblock %}
+
+{% block content %}
+<h1>Pagamento</h1>
+
+    <form method="POST" action="{% url 'core:place_order' %}">
+        {% csrf_token %}
+
+        <button onclick="alert('Sei stato reindirizzato al pagamento con il numero della carta.')">Pagamento con carta di credito</button><br>
+        <button onclick="alert('Sei stato reindirizzato al pagamento con PayPal.')">Pagamento con PayPal</button>
+
+    </form>
+
+{% endblock %}
