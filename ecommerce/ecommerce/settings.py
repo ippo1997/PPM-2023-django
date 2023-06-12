@@ -55,6 +55,17 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CORS_ALLOW_ORIGIN = [
+    'https://ppm-2023-django-production.up.railway.app',
+]
+
+CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_HTTPONLY = True
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://ppm-2023-django-production.up.railway.app',
+]
+
 ROOT_URLCONF = 'ecommerce.urls'
 
 TEMPLATES = [
