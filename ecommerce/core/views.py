@@ -84,6 +84,11 @@ def create_order(request):
 def order_summary(request):
     allowed_statuses = ['pending_payment', 'processing']
     orders = Order.objects.filter(user=request.user)
+
+    for order in orders:
+        order.total_price = sum(item.price for item in order.items.all())
+        order.save()
+
     return render(request, 'core/order_summary.html', {'orders': orders, 'allowed_statuses': allowed_statuses})
 
 
