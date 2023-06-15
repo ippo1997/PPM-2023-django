@@ -36,7 +36,13 @@ def cart_view(request):
     cart_items = request.session.get('cart', [])
     items = Item.objects.filter(id__in=cart_items)
     total_price = sum(item.price for item in items)
-    return render(request, 'core/cart.html', {'items': items, 'total_price': total_price})
+
+    item_quantities = {}
+    if request.method == 'POST':
+        item_quantities = {str(item.id): request.POST.get(str(item.id), '1') for item in items}
+
+    return render(request, 'core/cart.html',
+                  {'items': items, 'total_price': total_price, 'item_quantities': item_quantities})
 
 
 def add_to_cart(request, item_id):
@@ -61,7 +67,11 @@ def update_cart_item_quantity(request, item_id):
         cart_items.remove(item_id)
         cart_items += [item_id] * quantity
         request.session['cart'] = cart_items
-    return redirect('core:cart')
+
+    items = Item.objects.filter(id__in=cart_items)
+    total_price = sum(item.price * cart_items.count(item.id) for item in items)
+
+    return render(request, 'core/cart.html', {'items': items, 'total_price': total_price})
 
 
 def order_detail(request, pk):
