@@ -6,39 +6,39 @@
     <h2 class="mb-12 text-2xl text-center">Cart</h2>
     
     {% if items %}
-        <table>
+        <table class="w-full">
             <tr>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Total</th>
-                <th>Actions</th>
+                <th class="py-2 px-4">Name</th>
+                <th class="py-2 px-4">Price</th>
+                <th class="py-2 px-4">Quantity</th>
+                <th class="py-2 px-4">Total</th>
+                <th class="py-2 px-4">Actions</th>
             </tr>
             {% for item in items %}
                 <tr>
-                    <td>{{ item.name }}</td>
-                    <td>{{ item.price }}</td>
-                    <td>
+                    <td class="py-2 px-4">{{ item.name }}</td>
+                    <td class="py-2 px-4">{{ item.price }}</td>
+                    <td class="py-2 px-4">
                         <form method="POST" action="{% url 'core:update_cart_item_quantity' item.id %}">
                             {% csrf_token %}
-                            <input type="number" name="quantity" value="{{ item_quantities.item.id|default:'1' }}" min="1">
-                            <button type="submit" class="inline-block mt-3 px-3 py-3 bg-gray-800 text-white rounded-xl">Update quantity</button>
+                            <input type="number" name="quantity" value="{{ item_quantities.item.id|default:'1' }}" min="1" class="border border-gray-300 py-2 px-4 rounded">
+                            <button type="submit" class="mt-3 px-4 py-2 bg-gray-800 text-white rounded">Update quantity</button>
                         </form>
                     </td>
-                    <td>{{ item.price|floatformat:2 }}</td>
-                    <td>
-                        <a href="{% url 'core:remove_from_cart' item.id %}" class="inline-block mt-3 px-3 py-3 bg-red-800 text-white rounded-xl">Remove from cart</a>
+                    <td class="py-2 px-4">{{ item.price|floatformat:2 }}</td>
+                    <td class="py-2 px-4">
+                        <a href="{% url 'core:remove_from_cart' item.id %}" class="mt-3 px-4 py-2 bg-red-800 text-white rounded">Remove from cart</a>
                     </td>
                 </tr>
             {% endfor %}
         </table>
-        <hr class="m-2">
-        <p>Total: {{ total_price }}€</p>
+        <hr class="my-4">
+        <p class="text-right">Total: {{ total_price }}€</p>
         <form action="{% url 'core:create_order' %}" method="POST">
             {% csrf_token %}
-            <button type="submit">Place an order</button>
+            <button type="submit" class="mt-6 bg-teal-500 text-white px-6 py-3 rounded">Place an order</button>
         </form>
     {% else %}
-        <p>Your cart is empty</p>
+        <p class="text-center">Your cart is empty</p>
     {% endif %}
 {% endblock %}
