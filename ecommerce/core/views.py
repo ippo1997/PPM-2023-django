@@ -90,10 +90,10 @@ def order_detail(request, pk):
 def create_order(request):
     if request.method == 'POST':
         cart_items = request.session.get('cart', [])
-        order = Order.objects.create(user=request.user, status='pending_payment')
+        order = Order.objects.create(user=request.user, status='processing')
         order.items.add(*cart_items)
         del request.session['cart']
-        return redirect('core:place_order')  # Reindirizza alla pagina di pagamento
+        return redirect('core:place_order')
     else:
         return redirect('core:cart')
 

@@ -7,7 +7,6 @@ class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     items = models.ManyToManyField('item.Item')
     status = models.CharField(max_length=255, choices=(
-        ('pending_payment', 'In attesa di pagamento'),
         ('processing', 'In elaborazione'),
         ('shipped', 'Spedito'),
     ))
