@@ -17,7 +17,8 @@ class LoginForm(AuthenticationForm):
 class SignupForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
+        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', 'shipping_address',
+                  'billing_address')
 
     username = forms.CharField(widget=forms.TextInput(attrs={
         'placeholder': 'Your username',
@@ -41,5 +42,13 @@ class SignupForm(UserCreationForm):
     }))
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={
         'placeholder': 'Repeat password',
+        'class': 'w-full py-4 px-6 rounded-xl'
+    }))
+    shipping_address = forms.CharField(widget=forms.TextInput(attrs={
+        'placeholder': 'Your shipping address',
+        'class': 'w-full py-4 px-6 rounded-xl'
+    }))
+    billing_address = forms.CharField(widget=forms.TextInput(attrs={
+        'placeholder': 'Your billing address',
         'class': 'w-full py-4 px-6 rounded-xl'
     }))
