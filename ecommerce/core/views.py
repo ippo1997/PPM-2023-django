@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.models import User
 
 from item.models import Category, Item
 
@@ -100,8 +101,20 @@ def create_order(request):
 
 @login_required
 def order_summary(request):
-    allowed_statuses = ['pending_payment', 'processing']
-    orders = Order.objects.filter(user=request.user)
+    allowed_statuses = ['processing']
+
+    if request.user.is_superuser:
+        orders = Order.objects.all()
+    else:
+        orders = Order.objects.filter(user=request.user)
+
+    if request.method == 'POST' and request.user.is_superuser:
+        order_id = request.POST.get('order_id')
+        shipping_status = request.POST.get('shipping_status')
+        order = get_object_or_404(Order, id=order_id)
+        order.shipping_status = shipping_status
+        order.save()
+        return redirect('core:order_summary')
 
     for order in orders:
         order.total_price = sum(item.price for item in order.items.all())
@@ -125,3 +138,16 @@ def place_order(request):
     if payment_data:
         return redirect('payment_confirmation')
     return render(request, 'core/payment_confirmation.html', {'error_message': 'Dati di pagamento non validi'})
+
+
+@login_required
+def update_shipping_status(request):
+    if request.method == 'POST':
+        order_id = request.POST.get('order_id')
+        shipping_status = request.POST.get('shipping_status')
+
+        order = get_object_or_404(Order, id=order_id)
+        order.shipping_status = shipping_status
+        order.save()
+
+    return redirect('core:order_summary')

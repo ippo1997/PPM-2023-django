@@ -8,6 +8,7 @@
         <tr>
             <th>Order ID</th>
             <th>Status</th>
+            <th>Shipping Status</th>
             <th>Total Price</th>
             <th>Action</th>
         </tr>
@@ -15,6 +16,21 @@
             <tr>
                 <td>{{ order.id }}</td>
                 <td>{{ order.status }}</td>
+                <td>
+                    {% if request.user.is_superuser %}
+                        <form method="POST" action="{% url 'core:order_summary' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="order_id" value="{{ order.id }}">
+                            <select name="shipping_status">
+                                <option value="not_shipped" {% if order.shipping_status == 'not_shipped' %}selected{% endif %}>Non spedito</option>
+                                <option value="shipped" {% if order.shipping_status == 'shipped' %}selected{% endif %}>Spedito</option>
+                            </select>
+                            <button type="submit">Save</button>
+                        </form>
+                    {% else %}
+                        {{ order.shipping_status }}
+                    {% endif %}
+                </td>
                 <td>{{ order.total_price }}</td>
                 <td>
                     {% if order.status in allowed_statuses %}

@@ -8,8 +8,11 @@ class Order(models.Model):
     items = models.ManyToManyField('item.Item')
     status = models.CharField(max_length=255, choices=(
         ('processing', 'In elaborazione'),
-        ('shipped', 'Spedito'),
     ))
+    shipping_status = models.CharField(max_length=255, choices=(
+        ('not_shipped', 'Non spedito'),
+        ('shipped', 'Spedito'),
+    ), default='not_shipped')
     total_price = models.DecimalField(max_digits=10, decimal_places=2, default=Decimal('0.00'))
     created_at = models.DateTimeField(auto_now_add=True)
 
