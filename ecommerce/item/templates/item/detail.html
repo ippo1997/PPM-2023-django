@@ -17,10 +17,14 @@
                 {{ item.description }}
             </p>
             {% endif %}
-            <form action="{% url 'core:add_to_cart' item.id %}" method="POST">
-                {% csrf_token %}
-                <button type="submit" class="inline-block mt-6 px-6 py-3 bg-gray-800 text-white rounded-xl">Add to cart</button>
-            </form>
+            {% if request.user.is_authenticated %}
+                <form action="{% url 'core:add_to_cart' item.id %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="inline-block mt-6 px-6 py-3 bg-gray-800 text-white rounded-xl">Add to cart</button>
+                </form>
+            {% else %}
+                <button onclick="alert('Please login or register to add items to your cart.')" class="inline-block mt-6 px-6 py-3 bg-gray-800 text-white rounded-xl">Add to cart</button>
+            {% endif %}
         </div>
     </div>
 
