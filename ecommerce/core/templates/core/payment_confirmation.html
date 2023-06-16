@@ -3,14 +3,12 @@
 {% block title %}Checkout{% endblock %}
 
 {% block content %}
-<h1>Pagamento</h1>
+    <h1 class="text-3xl font-bold mb-4">Pagamento</h1>
 
-    <form method="POST" action="{% url 'core:place_order' %}">
+    <form method="POST" action="{% url 'core:place_order' %}" class="space-y-4">
         {% csrf_token %}
 
-        <button onclick="alert('Sei stato reindirizzato al pagamento con il numero della carta.')">Pagamento con carta di credito</button><br>
-        <button onclick="alert('Sei stato reindirizzato al pagamento con PayPal.')">Pagamento con PayPal</button>
-
+        <button onclick="alert('Sei stato reindirizzato al pagamento con il numero della carta.')" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Pagamento con carta di credito</button><br>
+        <button onclick="alert('Sei stato reindirizzato al pagamento con PayPal.')" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Pagamento con PayPal</button>
     </form>
-
 {% endblock %}
