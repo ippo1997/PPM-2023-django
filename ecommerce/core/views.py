@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from item.models import Category, Item
 
 from .forms import SignupForm
-from .models import Order
+from .models import Order, Address
 
 
 def index(request):
@@ -32,7 +32,11 @@ def signup(request):
         form = SignupForm(request.POST)
 
         if form.is_valid():
-            form.save()
+            user = form.save()
+
+            shipping_address = form.cleaned_data.get('shipping_address')
+            billing_address = form.cleaned_data.get('billing_address')
+            Address.objects.create(user=user, shipping_address=shipping_address, billing_address=billing_address)
 
             return redirect('/login/')
     else:

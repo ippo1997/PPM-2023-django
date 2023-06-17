@@ -18,3 +18,12 @@ class Order(models.Model):
 
     def __str__(self):
         return f"Ordine #{self.pk}"
+
+
+class Address(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    shipping_address = models.CharField(max_length=100)
+    billing_address = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"{self.user.username}'s Address"

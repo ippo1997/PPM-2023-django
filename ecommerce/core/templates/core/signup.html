@@ -9,36 +9,51 @@
 
             <div class="mb-3">
                 <label class="inline-block mb-2">Username</label><br>
-                {{ form.username }}
+                <div class="flex">
+                    <input type="text" name="username" class="w-full py-4 px-6 rounded-xl" placeholder="Your username">
+                </div>
             </div>
             <div class="mb-3">
                 <label class="inline-block mb-2">First name</label><br>
-                {{ form.first_name }}
+                <div class="flex">
+                    {{ form.first_name }}
+                </div>
             </div>
             <div class="mb-3">
                 <label class="inline-block mb-2">Surname</label><br>
-                {{ form.last_name }}
+                <div class="flex">
+                    {{ form.last_name }}
+                </div>
             </div>
             <div class="mb-3">
                 <label class="inline-block mb-2">E-mail</label><br>
-                {{ form.email }}
+                <div class="flex">
+                    {{ form.email }}
+                </div>
             </div>
             <div class="mb-3">
                 <label class="inline-block mb-2">Password</label><br>
-                {{ form.password1 }}
+                <div class="flex">
+                    <input type="password" name="password1" class="w-full py-4 px-6 rounded-xl" placeholder="Your password">
+                </div>
             </div>
             <div class="mb-3">
                 <label class="inline-block mb-2">Repeat password</label><br>
-                {{ form.password2 }}
+                <div class="flex">
+                    <input type="password" name="password2" class="w-full py-4 px-6 rounded-xl" placeholder="Repeat password">
+                </div>
             </div>
-
             <div class="mb-3">
                 <label class="inline-block mb-2">Shipping Address</label><br>
-                {{ form.shipping_address }}
+                <div class="flex">
+                    <input type="text" name="shipping_address" class="w-full py-4 px-6 rounded-xl" placeholder="Your shipping address">
+                </div>
             </div>
             <div class="mb-3">
                 <label class="inline-block mb-2">Billing Address</label><br>
-                {{ form.billing_address }}
+                <div class="flex">
+                    <input type="text" name="billing_address" class="w-full py-4 px-6 rounded-xl" placeholder="Your billing address">
+                </div>
             </div>
 
             {% if form.errors or form.non_field_errors %}
