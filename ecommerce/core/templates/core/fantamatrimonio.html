@@ -19,11 +19,11 @@
                 <tr>
                     <td>{{ evento.nome }}</td>
                     <td>
-                        <input type="checkbox" id="evento_{{ evento.id }}_individuale" name="evento_individuale" value="{{ evento.id }}">
+                        <input type="checkbox" id="evento_{{ evento.id }}_individuale" name="evento" value="{{ evento.id }}">
                         <label for="evento_{{ evento.id }}_individuale">Individuale ({{ evento.punteggio }})</label>
                     </td>
                     <td>
-                        <input type="checkbox" id="evento_{{ evento.id }}_squadra" name="evento_squadra" value="{{ evento.id }}">
+                        <input type="checkbox" id="evento_{{ evento.id }}_squadra" name="evento" value="{{ evento.id }}">
                         <label for="evento_{{ evento.id }}_squadra">A Squadra ({{ evento.punteggio_squadra }})</label>
                     </td>
                 </tr>
@@ -36,4 +36,31 @@
     <h2>Punteggio totale: {{ total_score }}</h2>
     {% endif %}
 </div>
+
+<script>
+    // Funzione per disabilitare la casella di controllo individuale quando viene selezionata quella a squadra
+    function toggleCheckboxes(event) {
+        var checkbox = event.target;
+        var squadraCheckboxId = checkbox.id;
+
+        // Se l'ID inizia con "evento_" e termina con "_squadra" (casella di controllo a squadra)
+        if (squadraCheckboxId.endsWith('_squadra')) {
+            // Trova l'ID della casella di controllo individuale corrispondente
+            var individualeCheckboxId = squadraCheckboxId.replace('_squadra', '_individuale');
+            var individualeCheckbox = document.getElementById(individualeCheckboxId);
+
+            // Disabilita la casella di controllo individuale corrispondente
+            if (individualeCheckbox) {
+                individualeCheckbox.disabled = checkbox.checked;
+            }
+        }
+    }
+
+    // Aggiungi un listener agli eventi di cambio stato delle caselle di controllo
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(function(checkbox) {
+        checkbox.addEventListener('change', toggleCheckboxes);
+    });
+</script>
+
 {% endblock %}

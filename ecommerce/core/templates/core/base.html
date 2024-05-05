@@ -8,16 +8,16 @@
 </head>
 <body>
     <nav class="py-6 px-6 flex justify-between items-center bg-gray-800 border-b border-gray-200">
-        <a href="/" class="text-2xl font-bold text-white">E-commerce Store</a>
+        <a href="/" class="text-2xl font-bold text-white">Homepage</a>
 
         <div class="space-x-6">
-            <a href="{% url 'item:items' %}" class="text-gray-100 hover:text-teal-100 font-semibold flex-container">
+            <!--<a href="{% url 'item:items' %}" class="text-gray-100 hover:text-teal-100 font-semibold flex-container">
                 <img src="../../../media/menu_images/search-3-24.png" class="inline-block align-middle mr-2">
                 Browse
-            </a>
+            </a> -->
             {% if request.user.is_authenticated %}
-                <a display="none" href="{% url 'core:cart' %}" class="px-6 py-3 text-lg text-white bg-teal-600 hover:bg-blue-700 rounded-lg font-semibold">Cart</a>
-                <a display="none" href="{% url 'core:order_summary' %}" class="px-6 py-3 text-lg text-white bg-teal-600 hover:bg-blue-700 rounded-lg font-semibold">Orders</a>
+             <!--   <a display="none" href="{% url 'core:cart' %}" class="px-6 py-3 text-lg text-white bg-teal-600 hover:bg-blue-700 rounded-lg font-semibold">Cart</a>
+                <a display="none" href="{% url 'core:order_summary' %}" class="px-6 py-3 text-lg text-white bg-teal-600 hover:bg-blue-700 rounded-lg font-semibold">Orders</a> -->
                 <a href="{% url 'core:fantamatrimonio' %}" class="px-6 py-3 text-lg text-white bg-teal-600 hover:bg-blue-700 rounded-lg font-semibold">Fantamatrimonio</a>
                 {% if user.is_superuser %}
                     {% if '127.0.0.1' in request.META.HTTP_HOST %}
