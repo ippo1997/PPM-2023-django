@@ -166,4 +166,6 @@ def fantamatrimonio_page(request):
         selected_event_ids = request.POST.getlist('evento')
         selected_eventi = Evento.objects.filter(pk__in=selected_event_ids)
         total_score = sum(evento.punteggio for evento in selected_eventi)
-    return render(request, 'fantamatrimonio.html', {'eventi': eventi, 'total_score': total_score})
+    for evento in eventi:
+        evento.punteggio_squadra = evento.punteggio * 2  # Aggiungo l'attributo punteggio_squadra per il punteggio a squadra
+    return render(request, 'core/fantamatrimonio.html', {'eventi': eventi, 'total_score': total_score})

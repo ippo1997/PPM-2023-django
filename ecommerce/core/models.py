@@ -30,7 +30,7 @@ class Address(models.Model):
 
 
 class Evento(models.Model):
-    nome = models.CharField(max_length=100)
+    nome = models.CharField(max_length=200)
     punteggio = models.IntegerField()
 
     def __str__(self):
@@ -38,6 +38,22 @@ class Evento(models.Model):
 
 class CustomUser(AbstractUser):
     eventi_partecipati = models.ManyToManyField(Evento, blank=True)
+    groups = models.ManyToManyField(
+        'auth.Group',
+        verbose_name='groups',
+        blank=True,
+        help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.',
+        related_name='customuser_set',  # Modifica l'argomento related_name
+        related_query_name='user'
+    )
+    user_permissions = models.ManyToManyField(
+        'auth.Permission',
+        verbose_name='user permissions',
+        blank=True,
+        help_text='Specific permissions for this user.',
+        related_name='customuser_set',  # Modifica l'argomento related_name
+        related_query_name='user'
+    )
 
     def __str__(self):
         return self.username

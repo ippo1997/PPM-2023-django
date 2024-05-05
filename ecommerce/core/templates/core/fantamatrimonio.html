@@ -1,28 +1,39 @@
 <!-- fantamatrimonio.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fantamatrimonio</title>
-</head>
-<body>
-    <h1>Selezione degli eventi Fantamatrimonio</h1>
+{% extends 'core/base.html' %}
+{% block title %}Selezione Eventi{% endblock %}
+{% block content %}
+<div class="w-1/2 my-6 mx-auto p-6 bg-gray-300 rounded-xl">
+    <h1 class="mb-6 text-3xl">Selezione degli eventi Fantamatrimonio</h1>
     <form method="post">
         {% csrf_token %}
-        <ul>
-            {% for evento in eventi %}
-            <li>
-                <input type="checkbox" id="evento_{{ evento.id }}" name="evento" value="{{ evento.id }}">
-                <label for="evento_{{ evento.id }}">{{ evento.nome }} - Punteggio: {{ evento.punteggio }}</label>
-            </li>
-            {% endfor %}
-        </ul>
-        <button type="submit">Calcola punteggio</button>
+        <table class="table-auto">
+            <thead>
+                <tr>
+                    <th>Evento</th>
+                    <th>Individuale</th>
+                    <th>A Squadra</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for evento in eventi %}
+                <tr>
+                    <td>{{ evento.nome }}</td>
+                    <td>
+                        <input type="checkbox" id="evento_{{ evento.id }}" name="evento" value="{{ evento.id }}">
+                        <label for="evento_{{ evento.id }}">Individuale ({{ evento.punteggio }})</label>
+                    </td>
+                    <td>
+                        <input type="checkbox" id="evento_{{ evento.id }}_squadra" name="evento" value="{{ evento.id }}">
+                        <label for="evento_{{ evento.id }}_squadra">A Squadra ({{ evento.punteggio_squadra }})</label>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <button class="py-4 px-8 text-lg bg-teal-500 hover:bg-teal-700 rounded-xl text-white" type="submit">Calcola punteggio</button>
     </form>
     {% if total_score %}
     <h2>Punteggio totale: {{ total_score }}</h2>
     {% endif %}
-</body>
-</html>
+</div>
+{% endblock %}
