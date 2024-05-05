@@ -1,6 +1,6 @@
 from django.db import models
 from decimal import Decimal
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractUser
 
 
 class Order(models.Model):
@@ -27,3 +27,17 @@ class Address(models.Model):
 
     def __str__(self):
         return f"{self.user.username}'s Address"
+
+
+class Evento(models.Model):
+    nome = models.CharField(max_length=100)
+    punteggio = models.IntegerField()
+
+    def __str__(self):
+        return self.nome
+
+class CustomUser(AbstractUser):
+    eventi_partecipati = models.ManyToManyField(Evento, blank=True)
+
+    def __str__(self):
+        return self.username

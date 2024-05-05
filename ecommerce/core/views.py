@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
+from .models import Evento
 
 from item.models import Category, Item
 
@@ -155,3 +156,14 @@ def update_shipping_status(request):
         order.save()
 
     return redirect('core:order_summary')
+
+
+@login_required
+def fantamatrimonio_page(request):
+    eventi = Evento.objects.all()
+    total_score = 0
+    if request.method == 'POST':
+        selected_event_ids = request.POST.getlist('evento')
+        selected_eventi = Evento.objects.filter(pk__in=selected_event_ids)
+        total_score = sum(evento.punteggio for evento in selected_eventi)
+    return render(request, 'fantamatrimonio.html', {'eventi': eventi, 'total_score': total_score})
