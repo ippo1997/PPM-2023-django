@@ -162,10 +162,19 @@ def update_shipping_status(request):
 def fantamatrimonio_page(request):
     eventi = Evento.objects.all()
     total_score = 0
+
     if request.method == 'POST':
-        selected_event_ids = request.POST.getlist('evento')
-        selected_eventi = Evento.objects.filter(pk__in=selected_event_ids)
-        total_score = sum(evento.punteggio for evento in selected_eventi)
-    for evento in eventi:
-        evento.punteggio_squadra = evento.punteggio * 2  # Aggiungo l'attributo punteggio_squadra per il punteggio a squadra
+        selected_individual_event_ids = request.POST.getlist('evento_individuale')
+        selected_team_event_ids = request.POST.getlist('evento_squadra')
+
+        selected_individual_eventi = Evento.objects.filter(pk__in=selected_individual_event_ids)
+        selected_team_eventi = Evento.objects.filter(pk__in=selected_team_event_ids)
+
+        # Calcoliamo il punteggio individuale
+        total_score += sum(evento.punteggio for evento in selected_individual_eventi)
+
+        # Calcoliamo il punteggio a squadra
+        for evento in selected_team_eventi:
+            total_score += evento.punteggio_squadra
+
     return render(request, 'core/fantamatrimonio.html', {'eventi': eventi, 'total_score': total_score})

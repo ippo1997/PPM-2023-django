@@ -19,11 +19,11 @@
                 <tr>
                     <td>{{ evento.nome }}</td>
                     <td>
-                        <input type="checkbox" id="evento_{{ evento.id }}" name="evento" value="{{ evento.id }}">
-                        <label for="evento_{{ evento.id }}">Individuale ({{ evento.punteggio }})</label>
+                        <input type="checkbox" id="evento_{{ evento.id }}_individuale" name="evento_individuale" value="{{ evento.id }}">
+                        <label for="evento_{{ evento.id }}_individuale">Individuale ({{ evento.punteggio }})</label>
                     </td>
                     <td>
-                        <input type="checkbox" id="evento_{{ evento.id }}_squadra" name="evento" value="{{ evento.id }}">
+                        <input type="checkbox" id="evento_{{ evento.id }}_squadra" name="evento_squadra" value="{{ evento.id }}">
                         <label for="evento_{{ evento.id }}_squadra">A Squadra ({{ evento.punteggio_squadra }})</label>
                     </td>
                 </tr>

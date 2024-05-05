@@ -32,9 +32,11 @@ class Address(models.Model):
 class Evento(models.Model):
     nome = models.CharField(max_length=200)
     punteggio = models.IntegerField()
+    punteggio_squadra = models.IntegerField()  # Assicurati che questo attributo sia definito correttamente
 
     def __str__(self):
         return self.nome
+
 
 class CustomUser(AbstractUser):
     eventi_partecipati = models.ManyToManyField(Evento, blank=True)
