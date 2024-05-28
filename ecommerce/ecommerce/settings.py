@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-@&9yx^(d(r&gu84wk+z6fq@6c&+x#^(m*)o_p$%qsc)p!z*=-t
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ppm-2023-django-production-b2dd.up.railway.app', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['*']
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
