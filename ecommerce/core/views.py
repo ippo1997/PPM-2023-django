@@ -157,8 +157,6 @@ def update_shipping_status(request):
 
     return redirect('core:order_summary')
 
-
-@login_required
 def fantamatrimonio_page(request):
     eventi = Evento.objects.all()
     total_score = 0
@@ -178,3 +176,13 @@ def fantamatrimonio_page(request):
             total_score += evento.punteggio_squadra
 
     return render(request, 'core/fantamatrimonio.html', {'eventi': eventi, 'total_score': total_score})
+
+def classifica_page(request):
+    # Passa i dati della classifica al template (esempio statico, potrebbe essere dinamico)
+    classifica_data = [
+        {'posizione': 1, 'squadra': 'Squadra A', 'punti': 100},
+        {'posizione': 2, 'squadra': 'Squadra B', 'punti': 90},
+        # Aggiungi altre squadre qui
+    ]
+    context = {'classifica': classifica_data}
+    return render(request, 'classifica.html', context)

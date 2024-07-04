@@ -26,4 +26,5 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(next_page='core:index'), name='logout'),
     path('update-shipping-status/<int:pk>/', views.update_shipping_status, name='update_shipping_status'),
     path('fantamatrimonio/', views.fantamatrimonio_page, name='fantamatrimonio'),
+    path('classifica/', views.classifica_page, name='classifica'),
 ]
