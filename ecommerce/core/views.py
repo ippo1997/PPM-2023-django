@@ -185,4 +185,4 @@ def classifica_page(request):
         # Aggiungi altre squadre qui
     ]
     context = {'classifica': classifica_data}
-    return render(request, 'classifica.html', context)
+    return render(request, 'core/classifica.html', context)
