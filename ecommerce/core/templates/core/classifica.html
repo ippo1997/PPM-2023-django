@@ -1,26 +1,28 @@
 <!-- classifica.html -->
 {% extends 'core/base.html' %}
-{% block title %}Selezione Eventi{% endblock %}
+{% block title %}Classifica{% endblock %}
 {% block content %}
-<div class="w-1/2 my-6 mx-auto p-6 bg-gray-300 rounded-xl">
-    <h1 class="mb-6 text-3xl">Classifica</h1>
-            <p class="mb-4">Al termine del momento dedicato agli invii durante il matrimonio qui apparirà la classifica finale.</p>
+<div class="w-full max-w-2xl my-6 mx-auto p-6 bg-gray-100 rounded-lg shadow-md">
+    <h1 class="mb-6 text-3xl font-bold text-gray-800">Classifica</h1>
+    <p class="mb-4 text-gray-700">Al termine del momento dedicato agli invii durante il matrimonio qui apparirà la classifica finale.</p>
 <!--
-   <table>
+    <table class="min-w-full bg-white rounded-lg shadow-md">
         <thead>
-            <tr>
-                <th>Nome Squadra</th>
-                <th>Punti</th>
+            <tr class="bg-gray-200 text-gray-700">
+                <th class="py-3 px-4 text-left font-semibold">Nome Squadra</th>
+                <th class="py-3 px-4 text-left font-semibold">Punti</th>
             </tr>
         </thead>
         <tbody>
             {% for squadra in squadre %}
-            <tr>
-                <td>{{ squadra.nome }}</td>
-                <td>{{ squadra.total_points }}</td>
+            <tr class="border-t">
+                <td class="py-3 px-4 text-gray-800">{{ squadra.nome }}</td>
+                <td class="py-3 px-4 text-gray-800">{{ squadra.total_points }}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
--->
+    -->
+</div>
+
 {% endblock %}

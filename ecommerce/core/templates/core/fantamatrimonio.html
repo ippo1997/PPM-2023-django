@@ -2,86 +2,28 @@
 {% extends 'core/base.html' %}
 {% block title %}Selezione Eventi{% endblock %}
 {% block content %}
-<div class="w-1/2 my-6 mx-auto p-6 bg-gray-300 rounded-xl">
-    <h1 class="mb-6 text-3xl">Selezione degli eventi Fantamatrimonio</h1>
-    <p class="mb-4">In questa pagina apparirà il form per inviare il nome della squadra e le azioni compiute. Il sistema calcolerà allora il punteggio nella pagina "Classifica".</p>
+<div class="w-full max-w-2xl my-6 mx-auto p-6 bg-gray-100 rounded-lg shadow-md">
+    <h1 class="mb-6 text-3xl font-bold text-gray-800">Selezione degli eventi Fantamatrimonio</h1>
+    <p class="mb-4 text-gray-700">In questa pagina apparirà il form per inviare il nome della squadra e le azioni compiute. Il sistema calcolerà allora il punteggio nella pagina "Classifica".</p>
 <!--
-   <form method="post">
+   <form method="post" class="space-y-4">
         {% csrf_token %}
-        <div>
+        <div class="space-y-2">
             {{ squadra_form.as_p }}
         </div>
-        <div>
+        <div class="space-y-2">
             {% for checkbox in azione_form.azioni %}
-                <div>
-                    <label>
+                <div class="flex items-center">
+                    <label class="flex items-center space-x-2 text-gray-700">
                         {{ checkbox.tag }}
-                        {{ checkbox.choice_label }}
+                        <span>{{ checkbox.choice_label }}</span>
                     </label>
                 </div>
             {% endfor %}
         </div>
-        <button type="submit">Invia</button>
+        <button type="submit" class="px-6 py-3 text-white bg-teal-600 hover:bg-teal-700 rounded-lg font-semibold">Invia</button>
     </form>
--->
-    <!--
-    <form method="post">
-        {% csrf_token %}
-        <table class="table-auto">
-            <thead>
-                <tr>
-                    <th>Evento</th>
-                    <th>Individuale</th>
-                    <th>A Squadra</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for evento in eventi %}
-                <tr>
-                    <td>{{ evento.nome }}</td>
-                    <td>
-                        <input type="checkbox" id="evento_{{ evento.id }}_individuale" name="evento" value="{{ evento.id }}">
-                        <label for="evento_{{ evento.id }}_individuale">Individuale ({{ evento.punteggio }})</label>
-                    </td>
-                    <td>
-                        <input type="checkbox" id="evento_{{ evento.id }}_squadra" name="evento" value="{{ evento.id }}">
-                        <label for="evento_{{ evento.id }}_squadra">A Squadra ({{ evento.punteggio_squadra }})</label>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <button class="py-4 px-8 text-lg bg-teal-500 hover:bg-teal-700 rounded-xl text-white" type="submit">Calcola punteggio</button>
-    </form>
-    {% if total_score %}
-    <h2>Punteggio totale: {{ total_score }}</h2>
-    {% endif %}
+    -->
 </div>
-
-<script>
-    // Funzione per disabilitare la casella di controllo individuale quando viene selezionata quella a squadra
-    function toggleCheckboxes(event) {
-        var checkbox = event.target;
-        var squadraCheckboxId = checkbox.id;
-
-        // Se l'ID inizia con "evento_" e termina con "_squadra" (casella di controllo a squadra)
-        if (squadraCheckboxId.endsWith('_squadra')) {
-            // Trova l'ID della casella di controllo individuale corrispondente
-            var individualeCheckboxId = squadraCheckboxId.replace('_squadra', '_individuale');
-            var individualeCheckbox = document.getElementById(individualeCheckboxId);
-
-            // Disabilita la casella di controllo individuale corrispondente
-            if (individualeCheckbox) {
-                individualeCheckbox.disabled = checkbox.checked;
-            }
-        }
-    }
-
-    // Aggiungi un listener agli eventi di cambio stato delle caselle di controllo
-    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    checkboxes.forEach(function(checkbox) {
-        checkbox.addEventListener('change', toggleCheckboxes);
-    });
-</script> -->
 
 {% endblock %}
