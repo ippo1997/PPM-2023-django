@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-@&9yx^(d(r&gu84wk+z6fq@6c&+x#^(m*)o_p$%qsc)p!z*=-t
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['ppm-2023-django-production-b2dd.up.railway.app']
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
@@ -63,7 +63,7 @@ CSRF_COOKIE_SECURE = True
 CSRF_COOKIE_HTTPONLY = True
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://ppm-2023-django-production.up.railway.app',
+    'https://ppm-2023-django-production-b2dd.up.railway.app',
 ]
 
 ROOT_URLCONF = 'ecommerce.urls'
