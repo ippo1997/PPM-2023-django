@@ -23,13 +23,13 @@
                     {% if '127.0.0.1' in request.META.HTTP_HOST %}
                         <a href="http://127.0.0.1:8000/admin" class="px-6 py-3 text-lg text-white bg-red-600 hover:bg-red-700 rounded-lg font-semibold">Admin area</a>
                     {% else %}
-                        <a href="https://ppm-2023-django-production.up.railway.app/admin/" class="px-6 py-3 text-lg text-white bg-red-600 hover:bg-red-700 rounded-lg font-semibold">Admin area</a>
+                        <a href="https://ppm-2023-django-production-b2dd.up.railway.app/admin/" class="px-6 py-3 text-lg text-white bg-red-600 hover:bg-red-700 rounded-lg font-semibold">Django area</a>
                     {% endif %}
                 {% endif %}
                 <a href="{% url 'core:logout' %}" class="px-6 py-3 text-lg text-white bg-purple-600 hover:bg-blue-700 rounded-lg font-semibold">Log out</a>
             {% else  %}
-               <a href="{% url 'core:login' %}" class="px-6 py-3 text-lg text-white bg-purple-600 hover:bg-blue-700 rounded-lg font-semibold">Login</a>
-                <a href="{% url 'core:signup' %}" class="px-6 py-3 text-lg text-white bg-purple-600 hover:bg-blue-700 rounded-lg font-semibold">Sign up</a>
+               <a href="{% url 'core:login' %}" class="px-6 py-3 text-lg text-white bg-purple-600 hover:bg-blue-700 rounded-lg font-semibold">Admin Area</a>
+               <!-- <a href="{% url 'core:signup' %}" class="px-6 py-3 text-lg text-white bg-purple-600 hover:bg-blue-700 rounded-lg font-semibold">Sign up</a> -->
              <a href="{% url 'core:fantamatrimonio' %}" class="px-6 py-3 text-lg text-white bg-purple-600 hover:bg-blue-700 rounded-lg font-semibold">Form</a>
              <a href="{% url 'core:classifica' %}" class="px-6 py-3 text-lg text-white bg-purple-600 hover:bg-blue-700 rounded-lg font-semibold">Classifica</a>
             {% endif %}
