@@ -72,9 +72,11 @@ class Squadra(models.Model):
 class Azione(models.Model):
     descrizione = models.CharField(max_length=255)
     punti = models.IntegerField()
+    azione_esclusiva = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.descrizione} [{self.punti} punti]"
+
 
 class SquadraAzione(models.Model):
     squadra = models.ForeignKey(Squadra, on_delete=models.CASCADE)

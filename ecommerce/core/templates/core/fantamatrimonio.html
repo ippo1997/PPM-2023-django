@@ -1,29 +1,26 @@
 <!-- fantamatrimonio.html -->
 {% extends 'core/base.html' %}
-{% block title %}Selezione Eventi{% endblock %}
+{% block title %}Fantamatrimonio{% endblock %}
 {% block content %}
 <div class="w-full max-w-2xl my-6 mx-auto p-6 bg-gray-100 rounded-lg shadow-md">
-    <h1 class="mb-6 text-3xl font-bold text-gray-800">Selezione degli eventi Fantamatrimonio</h1>
-    <p class="mb-4 text-gray-700">In questa pagina apparirà il form per inviare il nome della squadra e le azioni compiute. Il sistema calcolerà allora il punteggio nella pagina "Classifica".</p>
-<!--
-   <form method="post" class="space-y-4">
+    <h1 class="mb-6 text-3xl font-bold text-gray-800">Fantamatrimonio</h1>
+    <!--
+    <form method="post">
         {% csrf_token %}
-        <div class="space-y-2">
-            {{ squadra_form.as_p }}
+        <div class="mb-4">
+            {{ squadra_form.nome.label_tag }}
+            {{ squadra_form.nome }}
         </div>
-        <div class="space-y-2">
-            {% for checkbox in azione_form.azioni %}
-                <div class="flex items-center">
-                    <label class="flex items-center space-x-2 text-gray-700">
-                        {{ checkbox.tag }}
-                        <span>{{ checkbox.choice_label }}</span>
-                    </label>
-                </div>
-            {% endfor %}
+        <div class="mb-4">
+            {{ azione_form.azioni_esclusive.label_tag }}
+            {{ azione_form.azioni_esclusive }}
         </div>
-        <button type="submit" class="px-6 py-3 text-white bg-teal-600 hover:bg-teal-700 rounded-lg font-semibold">Invia</button>
+        <div class="mb-4">
+            {{ azione_form.azioni.label_tag }}
+            {{ azione_form.azioni }}
+        </div>
+        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-lg">Invia</button>
     </form>
-    -->
 </div>
-
+-->
 {% endblock %}

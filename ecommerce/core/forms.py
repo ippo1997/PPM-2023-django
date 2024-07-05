@@ -42,8 +42,13 @@ class SquadraForm(forms.ModelForm):
         fields = ['nome']
 
 class AzioneForm(forms.Form):
+    azioni_esclusive = forms.ModelChoiceField(
+        queryset=Azione.objects.filter(azione_esclusiva=True),
+        widget=forms.RadioSelect,
+        required=True
+    )
     azioni = forms.ModelMultipleChoiceField(
-        queryset=Azione.objects.all(),
+        queryset=Azione.objects.filter(azione_esclusiva=False),
         widget=forms.CheckboxSelectMultiple,
         required=True
     )

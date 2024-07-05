@@ -166,6 +166,11 @@ def fantamatrimonio(request):
         if squadra_form.is_valid() and azione_form.is_valid():
             squadra = squadra_form.save()
 
+            # Salva l'azione esclusiva
+            azione_esclusiva = azione_form.cleaned_data['azioni_esclusive']
+            SquadraAzione.objects.create(squadra=squadra, azione=azione_esclusiva, completata=True)
+
+            # Salva le azioni non esclusive
             for azione in azione_form.cleaned_data['azioni']:
                 SquadraAzione.objects.create(squadra=squadra, azione=azione, completata=True)
 
