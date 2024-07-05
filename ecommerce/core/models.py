@@ -75,7 +75,10 @@ class Azione(models.Model):
     azione_esclusiva = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"{self.descrizione} [{self.punti} punti]"
+        if self.azione_esclusiva:
+            return self.descrizione
+        else:
+            return f"{self.descrizione} [{self.punti} punti]"
 
 
 class SquadraAzione(models.Model):
