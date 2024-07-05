@@ -28,10 +28,10 @@
                 {% endif %}
                 <a href="{% url 'core:logout' %}" class="px-6 py-3 text-lg text-white bg-purple-600 hover:bg-blue-700 rounded-lg font-semibold">Log out</a>
             {% else  %}
-               <a href="{% url 'core:login' %}" class="px-6 py-3 text-lg text-white bg-purple-600 hover:bg-blue-700 rounded-lg font-semibold">Admin Area</a>
                <!-- <a href="{% url 'core:signup' %}" class="px-6 py-3 text-lg text-white bg-purple-600 hover:bg-blue-700 rounded-lg font-semibold">Sign up</a> -->
              <a href="{% url 'core:fantamatrimonio' %}" class="px-6 py-3 text-lg text-white bg-purple-600 hover:bg-blue-700 rounded-lg font-semibold">Form</a>
              <a href="{% url 'core:classifica' %}" class="px-6 py-3 text-lg text-white bg-purple-600 hover:bg-blue-700 rounded-lg font-semibold">Classifica</a>
+            <a href="{% url 'core:login' %}" class="px-6 py-3 text-lg text-white bg-purple-600 hover:bg-blue-700 rounded-lg font-semibold">Admin Area</a>
             {% endif %}
         </div>
     </nav>
