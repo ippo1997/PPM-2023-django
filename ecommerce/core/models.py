@@ -59,3 +59,24 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.username
+
+
+from django.db import models
+
+class Squadra(models.Model):
+    nome = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.nome
+
+class Azione(models.Model):
+    descrizione = models.CharField(max_length=255)
+    punti = models.IntegerField()
+
+    def __str__(self):
+        return f"{self.descrizione} [{self.punti} punti]"
+
+class SquadraAzione(models.Model):
+    squadra = models.ForeignKey(Squadra, on_delete=models.CASCADE)
+    azione = models.ForeignKey(Azione, on_delete=models.CASCADE)
+    completata = models.BooleanField(default=False)

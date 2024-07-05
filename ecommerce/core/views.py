@@ -2,11 +2,12 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from .models import Evento
+from django.db.models import Sum
 
 from item.models import Category, Item
 
-from .forms import SignupForm
-from .models import Order, Address
+from .forms import SignupForm, SquadraForm, AzioneForm
+from .models import Order, Address, Squadra, Azione, SquadraAzione
 
 
 def index(request):
@@ -157,32 +158,30 @@ def update_shipping_status(request):
 
     return redirect('core:order_summary')
 
-def fantamatrimonio_page(request):
-    eventi = Evento.objects.all()
-    total_score = 0
-
+def fantamatrimonio(request):
     if request.method == 'POST':
-        selected_individual_event_ids = request.POST.getlist('evento_individuale')
-        selected_team_event_ids = request.POST.getlist('evento_squadra')
+        squadra_form = SquadraForm(request.POST)
+        azione_form = AzioneForm(request.POST)
 
-        selected_individual_eventi = Evento.objects.filter(pk__in=selected_individual_event_ids)
-        selected_team_eventi = Evento.objects.filter(pk__in=selected_team_event_ids)
+        if squadra_form.is_valid() and azione_form.is_valid():
+            squadra = squadra_form.save()
 
-        # Calcoliamo il punteggio individuale
-        total_score += sum(evento.punteggio for evento in selected_individual_eventi)
+            for azione in azione_form.cleaned_data['azioni']:
+                SquadraAzione.objects.create(squadra=squadra, azione=azione, completata=True)
 
-        # Calcoliamo il punteggio a squadra
-        for evento in selected_team_eventi:
-            total_score += evento.punteggio_squadra
+            return redirect('core:classifica')
 
-    return render(request, 'core/fantamatrimonio.html', {'eventi': eventi, 'total_score': total_score})
+    else:
+        squadra_form = SquadraForm()
+        azione_form = AzioneForm()
 
-def classifica_page(request):
-    # Passa i dati della classifica al template (esempio statico, potrebbe essere dinamico)
-    classifica_data = [
-        {'posizione': 1, 'squadra': 'Squadra A', 'punti': 100},
-        {'posizione': 2, 'squadra': 'Squadra B', 'punti': 90},
-        # Aggiungi altre squadre qui
-    ]
-    context = {'classifica': classifica_data}
+    context = {
+        'squadra_form': squadra_form,
+        'azione_form': azione_form
+    }
+    return render(request, 'core/fantamatrimonio.html', context)
+
+def classifica(request):
+    squadre = Squadra.objects.all().annotate(total_points=Sum('squadraazione__azione__punti')).order_by('-total_points')
+    context = {'squadre': squadre}
     return render(request, 'core/classifica.html', context)

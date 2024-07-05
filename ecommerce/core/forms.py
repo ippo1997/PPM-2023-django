@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 
-from .models import Address
+from .models import Address, Squadra, Azione
 
 
 class LoginForm(AuthenticationForm):
@@ -14,7 +14,6 @@ class LoginForm(AuthenticationForm):
         'placeholder': 'Your password',
         'class': 'w-full py-4 px-6 rounded-xl'
     }))
-
 
 class SignupForm(UserCreationForm):
     shipping_address = forms.CharField(widget=forms.TextInput(attrs={
@@ -36,3 +35,15 @@ class SignupForm(UserCreationForm):
         billing_address = self.cleaned_data.get('billing_address')
         Address.objects.create(user=user, shipping_address=shipping_address, billing_address=billing_address)
         return user
+
+class SquadraForm(forms.ModelForm):
+    class Meta:
+        model = Squadra
+        fields = ['nome']
+
+class AzioneForm(forms.Form):
+    azioni = forms.ModelMultipleChoiceField(
+        queryset=Azione.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=True
+    )
