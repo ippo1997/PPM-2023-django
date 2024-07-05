@@ -21,7 +21,7 @@
                 <a href="{% url 'core:fantamatrimonio' %}" class="px-6 py-3 text-lg text-white bg-teal-600 hover:bg-blue-700 rounded-lg font-semibold">Fantamatrimonio</a>
                 {% if user.is_superuser %}
                     {% if '127.0.0.1' in request.META.HTTP_HOST %}
-                        <a href="http://127.0.0.1:8000/admin" class="px-6 py-3 text-lg text-white bg-red-600 hover:bg-red-700 rounded-lg font-semibold">Admin area</a>
+                        <a href="http://127.0.0.1:8000/admin" class="px-6 py-3 text-lg text-white bg-red-600 hover:bg-red-700 rounded-lg font-semibold">Django area</a>
                     {% else %}
                         <a href="https://ppm-2023-django-production-b2dd.up.railway.app/admin/" class="px-6 py-3 text-lg text-white bg-red-600 hover:bg-red-700 rounded-lg font-semibold">Django area</a>
                     {% endif %}
