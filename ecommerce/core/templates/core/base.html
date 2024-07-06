@@ -19,6 +19,8 @@
              <!--   <a display="none" href="{% url 'core:cart' %}" class="px-6 py-3 text-lg text-white bg-teal-600 hover:bg-blue-700 rounded-lg font-semibold">Cart</a>
                 <a display="none" href="{% url 'core:order_summary' %}" class="px-6 py-3 text-lg text-white bg-teal-600 hover:bg-blue-700 rounded-lg font-semibold">Orders</a> -->
                 <a href="{% url 'core:fantamatrimonio' %}" class="px-6 py-3 text-lg text-white bg-teal-600 hover:bg-blue-700 rounded-lg font-semibold">Fantamatrimonio</a>
+                <a href="{% url 'core:classifica' %}" class="px-6 py-3 text-lg text-white bg-purple-600 hover:bg-blue-700 rounded-lg font-semibold">Classifica</a>
+
                 {% if user.is_superuser %}
                     {% if '127.0.0.1' in request.META.HTTP_HOST %}
                         <a href="http://127.0.0.1:8000/admin" class="px-6 py-3 text-lg text-white bg-red-600 hover:bg-red-700 rounded-lg font-semibold">Django area</a>
